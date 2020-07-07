@@ -11,6 +11,14 @@ use function SiteMap\instance_filter;
 final class Url implements Stringable
 {
 
+    const CHANGE_FREQUENCY_ALWAYS = 'always';
+    const CHANGE_FREQUENCY_HOURLY = 'hourly';
+    const CHANGE_FREQUENCY_DAILY = 'daily';
+    const CHANGE_FREQUENCY_WEEKLY = 'weekly';
+    const CHANGE_FREQUENCY_MONTHLY = 'monthly';
+    const CHANGE_FREQUENCY_YEARLY = 'yearly';
+    const CHANGE_FREQUENCY_NEVER = 'never';
+
     /**
      * @var string
      */
@@ -36,7 +44,7 @@ final class Url implements Stringable
      */
     private $alternates = [];
 
-    public function __construct(string $loc, ?DateTime $lastMod = null, string $changeFreq = 'daily', string $priority = '1.0', array $alternates = [])
+    public function __construct(string $loc, ?DateTime $lastMod = null, string $changeFreq = self::CHANGE_FREQUENCY_DAILY, string $priority = '1.0', array $alternates = [])
     {
         $this->setLoc($loc);
         $this->setLastMod($lastMod ?? new DateTime);
