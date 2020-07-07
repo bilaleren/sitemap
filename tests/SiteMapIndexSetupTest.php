@@ -46,4 +46,20 @@ class SiteMapIndexSetupTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function testCanItWriteSiteMapFile()
+    {
+        $siteMapIndex = new SiteMapIndex;
+
+        $siteMapIndex->registerBasicMapIndex('http://example.com/example.xml');
+
+        $siteMapIndex->writeToFile($file = __DIR__ . '/sitemapindex-test.xml');
+
+        $this->assertFileExists($file);
+
+        @unlink($file);
+    }
+
 }

@@ -66,4 +66,20 @@ class SiteMapSetupTest extends TestCase
         $this->assertNotNull($siteMap->getMapIndex());
     }
 
+    /**
+     * @test
+     */
+    public function testCanItWriteSiteMapFile()
+    {
+        $siteMap = new SiteMap;
+
+        $siteMap->registerBasicUrl('http://example.com/path-1');
+
+        $siteMap->writeToFile($file = __DIR__ . '/sitemap-test.xml');
+
+        $this->assertFileExists($file);
+
+        @unlink($file);
+    }
+
 }
