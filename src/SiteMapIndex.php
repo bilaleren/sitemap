@@ -61,6 +61,15 @@ class SiteMapIndex implements Stringable
     }
 
     /**
+     * @param string $path
+     * @return bool
+     */
+    public function writeToFile(string $path): bool
+    {
+        return (bool) file_put_contents($path, $this->toString());
+    }
+
+    /**
      * @return string
      */
     public function toString(): string
