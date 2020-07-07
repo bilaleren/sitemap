@@ -2,6 +2,12 @@
 
 Sitemaps are an easy way for webmasters to inform search engines about pages on their sites that are available for crawling. In its simplest form, a Sitemap is an XML file that lists URLs for a site along with additional metadata about each URL (when it was last updated, how often it usually changes, and how important it is, relative to other URLs in the site) so that search engines can more intelligently crawl the site.
 
+## Installation
+
+```
+composer require bilaleren/sitemap
+```
+
 ## Create Sitemap
 
 ```php
@@ -22,14 +28,16 @@ $siteMap
     ->registerBasicUrl('http://exampe.com/path-1')
     ->registerAlternate(new Alternate('http://exampe.com/tr/path-1', 'tr'));
 
-$siteMap
-    ->registerBasicUrl('http://exampe.com/path-2');
+$siteMap->registerBasicUrl('http://exampe.com/path-2');
 
 $siteMap->registerUrl(new Url('http://example.com/example-2'));
 $siteMap->registerBasicUrl('http://example.com/example-3');
 
 $siteMap
     ->registerBasicUrl('http://example.com/example-4');
+
+// save as sitemap.xml
+$siteMap->writeToFile('sitemap.xml');
 
 echo $siteMap;
 ```
@@ -52,8 +60,13 @@ $siteMap = new SiteMap;
 $siteMap->registerBasicUrl('http://example.com/example');
 $siteMap->registerBasicMapIndex('http://site.com/sitemap-1.xml');
 
-echo (new SiteMapIndex)
+$siteMapIndex = (new SiteMapIndex)
     ->registerSiteMap($siteMap)
     ->registerMapIndex(new MapIndex('http://site.com/sitemap-2.xml'))
     ->registerMapIndex(new MapIndex('http://site.com/sitemap-3.xml', new DateTime));
+
+// save as sitemap.xml
+$siteMapIndex->writeToFile('sitemap.xml');
+
+echo $siteMapIndex;
 ```
